@@ -1,5 +1,42 @@
 # Python-Cache-Simulator
 
+## Usage:
+ 
+usage: cache_sim.py [-h] -trace TRACE [-grid] [-config CONFIG]
+
+optional arguments:
+  -h, --help      show this help message and exit
+  -trace TRACE    Path to memory address trace .trc file
+  -grid           (Optional) Perform grid search across various configurations
+  -config CONFIG  Path to simulation configuration .cfg file
+
+### Example Usage:
+
+Using config and trace files.
+```
+python3 cache_sim.py -trace example.trc -config example.cfg
+```
+
+Performing grid search across hardcoded config parameters (output is written to grid_search.csv).
+```
+python3 cache_sim.py -trace example.trc -grid
+```
+### Example Output:
+
+100%|--------------------------------| 695521/695521 [00:31<00:00, 22304.47it/s]
+
+Cache Size 32768 - Block Size 64 - Associativity 4
+Num Blocks 512 - Num Sets 128
+Tag Length 19 - Index Length 7 - Offset Length 6
+Num Accesses 695521 - Num Hits 594110 - Num Misses 101411
+Hit Rate: 85.42
+
+### Dependencies (can be installed via pip):
+
+- python==3.6.8
+- numpy>=1.15.4
+- tqdm>=4.29.1
+
 ## Implementation Details:
 
 ### Configuration Calculations:
@@ -56,7 +93,7 @@ Cache: Python dictionary of k (num_sets) set data structures indexed by number (
 cache = {k: set for k in range(num_sets)}
 ```
 
-## Simulation Algorithm:
+### Cache Algorithm:
 For Address in Trace
   - Calculate Tag, Index, and Offset from Address
 
@@ -76,44 +113,6 @@ For Address in Trace
     - Hit = False (Miss)
 
 After simulation, the hit rate = sum(hits) / # accesses * 100%
-
-## Dependencies (can be installed via pip):
-
-- python==3.6.8
-- numpy>=1.15.4
-- tqdm>=4.29.1
-
-## Usage:
- 
-usage: cache_sim.py [-h] -trace TRACE [-grid] [-config CONFIG]
-
-optional arguments:
-  -h, --help      show this help message and exit
-  -trace TRACE    Path to memory address trace .trc file
-  -grid           (Optional) Perform grid search across various configurations
-  -config CONFIG  Path to simulation configuration .cfg file
-
-### Example Output:
-
-100%|--------------------------------| 695521/695521 [00:31<00:00, 22304.47it/s]
-
-Cache Size 32768 - Block Size 64 - Associativity 4
-Num Blocks 512 - Num Sets 128
-Tag Length 19 - Index Length 7 - Offset Length 6
-Num Accesses 695521 - Num Hits 594110 - Num Misses 101411
-Hit Rate: 85.42
-
-## Examples:
-
-Using config and trace files.
-```
-python3 cache_sim.py -trace example.trc -config example.cfg
-```
-
-Performing grid search across hardcoded config parameters (output is written to grid_search.csv).
-```
-python3 cache_sim.py -trace example.trc -grid
-```
 
 ## Grid Search Results:
 
