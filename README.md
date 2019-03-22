@@ -1,5 +1,8 @@
 # Python-Cache-Simulator
 
+Cache Performance Simulator using a Least Recently Used (LRU) replacement policy.
+
+
 ## Usage:
  
 usage: cache_sim.py [-h] -trace TRACE [-grid] [-config CONFIG]
